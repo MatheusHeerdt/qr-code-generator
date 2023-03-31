@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.create-page');
+});
+
+
+Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+    Route::post('', [App\Http\Controllers\ClientController::class, 'store'])->name('store');
+    Route::get('/{name}', [App\Http\Controllers\ClientController::class, 'qrCode'])->name('qr-code');
+    Route::get('/show/{name}', [App\Http\Controllers\ClientController::class, 'show'])->name('show');
 });
